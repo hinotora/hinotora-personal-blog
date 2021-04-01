@@ -33,10 +33,15 @@
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
+                    <ul class="nav flex-column" id="accordion">
                         <li class="nav-item admin-nav-item">
                             <a class="nav-link" href="{{ route('page-admin-dashboard') }}">
                                 <span class="fa-stack fa-lg"><i class="fas fa-home"></i></span> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item admin-nav-item">
+                            <a class="nav-link" href="{{ route('page-admin-article-list') }}">
+                                <span class="fa-stack fa-lg"><i class="fas fa-newspaper"></i></span> Articles
                             </a>
                         </li>
                         <li class="nav-item admin-nav-item">
@@ -44,15 +49,10 @@
                                 <span class="fa-stack fa-lg"><i class="fas fa-list"></i></span> Categories
                             </a>
                         </li>
-                        <li class="nav-item admin-nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="fa-stack fa-lg"><i class="fas fa-newspaper"></i></span> Articles
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </nav>
-            <main>
+            <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 @yield('content')
             </main>
         </div>

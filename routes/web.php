@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
@@ -18,6 +19,10 @@ Route::prefix('/admin')->group(function () {
     /* Only for authenticated */
     Route::middleware('auth')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('page-admin-dashboard');
+
+        Route::prefix('/articles')->group(function() {
+            Route::get('/', [AdminArticleController::class, 'list'])->name('page-admin-article-list');
+        });
     });
 });
 

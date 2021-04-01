@@ -95,3 +95,17 @@ body {
     color: #005cbf;
     background-color: #c8cbcf;
 }
+
+.article-img {
+    display: block;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 200px;
+}
+
+.article-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
