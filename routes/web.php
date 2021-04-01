@@ -7,6 +7,20 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
+/* Admin routes */
+Route::prefix('/admin')->group(function () {
+
+    /* Auth routes */
+    Route::get('/login', [LoginController::class,  'showLoginForm'])->name('page-admin-login');
+    Route::post('/login', [LoginController::class,  'login'])->name('action-admin-login');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('action-admin-logout');
+
+    /* Only for authenticated */
+    Route::middleware('auth')->group(function () {
+        Route::get('/', [AdminController::class, 'dashboard'])->name('page-admin-dashboard');
+    });
+});
+
 /* Blog routes */
 Route::get('/', [ArticleController::class,  'recent'])->name('page-home-index');
 
