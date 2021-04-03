@@ -12,7 +12,7 @@
 <body>
     <div class="text-center">
         <form class="form-signin" method="POST" action="{{ route('action-admin-login') }}">
-            <img class="mb-4" src="{{ url('resources/icons/brand-img.png') }}" alt="" width="72" height="72">
+            <img class="mb-4" src="{{ url('/icons/brand-img.png') }}" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             @csrf
             <label for="inputEmail" class="sr-only">Email address</label>

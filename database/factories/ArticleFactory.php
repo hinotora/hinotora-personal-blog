@@ -34,7 +34,7 @@ class ArticleFactory extends Factory
             'title'=> $title,
             'slug'=> $slug,
             'description'=>$this->faker->paragraph(2),
-            'preview'=>$this->faker->imageUrl(728, 200, 'animals', true),
+            'preview'=>$this->faker->imageUrl(700, 200, 'animals', true),
             'content'=>$this->faker->randomHtml(4, 4),
             'views'=>0,
             'created_at'=>$datetime,

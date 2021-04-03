@@ -33,7 +33,7 @@ class CreateArticlesTable extends Migration
             $table->string('preview', 150);
             $table->longText('content');
 
-            $table->integer('views');
+            $table->integer('views')->default(0);
 
             $table->date('created_at')->useCurrent();
         });

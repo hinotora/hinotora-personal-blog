@@ -16,11 +16,11 @@ return [
     ],
 
     'preview' => [
-        'home' => '/resources/blog/banners/1.jpg',
-        'articles' => '/resources/blog/banners/1.jpg',
-        'category' => '/resources/blog/banners/1.jpg',
-        'about' => '/resources/blog/banners/1.jpg',
-        'contacts' => '/resources/blog/banners/1.jpg',
+        'home' => 'https://wallpaperaccess.com/full/4167301.jpg',
+        'articles' => 'https://wallpaperaccess.com/full/4167301.jpg',
+        'category' => 'https://wallpaperaccess.com/full/4167301.jpg',
+        'about' => 'https://wallpaperaccess.com/full/4167301.jpg',
+        'contacts' => 'https://wallpaperaccess.com/full/4167301.jpg',
     ]
 
 ];

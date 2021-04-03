@@ -22,6 +22,8 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/articles')->group(function() {
             Route::get('/', [AdminArticleController::class, 'list'])->name('page-admin-article-list');
+            Route::get('/new', [AdminArticleController::class, 'showNewForm'])->name('page-admin-article-new');
+            Route::post('/new', [AdminArticleController::class, 'new'])->name('action-admin-article-new');
         });
     });
 });

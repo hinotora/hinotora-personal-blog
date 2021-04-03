@@ -11,9 +11,17 @@
             </div>
         </form>
         <div class="ml-auto">
-            <a class="btn btn-success btn-new-article" href="#">Create new article</a>
+            <a class="btn btn-success btn-new-article" href="{{ route('page-admin-article-new') }}">Create new article</a>
         </div>
     </div>
+
+    @if(session('success'))
+        <div class="dropdown-divider mb-3"></div>
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endisset
+
     <div class="dropdown-divider mb-3"></div>
     @foreach($articles as $item)
         <div class="d-flex border rounded mb-3">
@@ -36,7 +44,7 @@
                 <p class="card-text">Author: <span class="badge badge-secondary">{{ $item->user->name }}</span></p>
             </div>
             <div class="d-flex flex-column p-2">
-                <a class="btn btn-info mb-1" href="#">Preview</a>
+                <a class="btn btn-info mb-1" href="{{ route('page-article-detail', $item->slug) }}">Preview</a>
                 <a class="btn btn-primary mb-1" href="#">Update</a>
                 <button class="btn btn-danger mt-auto" data-toggle="article-delete" data-value="{{ $item->ID }}">Delete</button>
             </div>

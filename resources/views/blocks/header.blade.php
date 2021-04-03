@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="{{ route('page-home-index') }}">
-            <img src="{{ url('resources/icons/brand-img.png') }}" width="30" height="30" class="d-inline-block align-top mr-1" alt="Logo" loading="lazy">
+            <img src="{{ url('icons/brand-img.png') }}" width="30" height="30" class="d-inline-block align-top mr-1" alt="Logo" loading="lazy">
             {{ config('app.name') }}
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
