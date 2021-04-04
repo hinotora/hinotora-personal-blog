@@ -3,7 +3,6 @@
 @section('title') Articles @endsection
 
 @section('content')
-
     <form action="{{ route('action-admin-article-new') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="d-flex">
@@ -32,7 +31,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Title</span>
             </div>
-            <input type="text" name="title" class="form-control" placeholder="This is best article in the world" maxlength="150">
+            <input type="text" name="title" class="form-control" value="{{ old('title') }}" placeholder="Title" maxlength="150">
         </div>
 
         <div class="input-group mb-3">
@@ -41,13 +40,13 @@
             </div>
             <select class="custom-select" name="category">
                 @foreach($categories as $category)
-                    <option value="{{ $category->ID }}">{{ $category->name }}</option>
+                    <option {{ old('category') == $category->ID ? 'selected' : '' }} value="{{ $category->ID }}">{{ $category->name }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <textarea class="form-control" rows="3" maxlength="250" placeholder="Description" name="description"></textarea>
+            <textarea class="form-control" rows="3" maxlength="250" placeholder="Description" name="description">{{ old('description') }}</textarea>
         </div>
 
         <div class="custom-file">
@@ -61,7 +60,7 @@
 
         <div class="form-group mt-2">
             <label for="wysiwyg"> Article body </label>
-            <textarea name="body" id="wysiwyg" rows="10"></textarea>
+            <textarea name="body" id="wysiwyg" rows="10">{{ old('body') }}</textarea>
         </div>
     </form>
 
