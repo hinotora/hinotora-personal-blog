@@ -65,4 +65,15 @@ class ArticleController extends Controller
         // Redirect to article list with message
         return redirect()->route('page-admin-article-list')->with('success', 'Article created!');
     }
+
+    public function delete($id) {
+        $article = Article::findOrFail($id);
+
+        if($article->delete()) {
+            return redirect()->back()->with('success','Article deleted!');
+        }
+        else {
+            return redirect()->back()->with('fail','Error while deleting');
+        }
+    }
 }
