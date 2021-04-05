@@ -76,4 +76,36 @@ class ArticleController extends Controller
             return redirect()->back()->with('fail','Error while deleting');
         }
     }
+
+    public function showUpdateForm($id) {
+        $article = Article::findOrFail($id);
+        $categories = Category::all();
+
+        return view('admin.article.update', compact('article', 'categories'));
+    }
+
+    public function update(Request $request, $id) {
+        $validated = $request->validate([
+            'category' => 'required|exists:categories,ID',
+            'title' => 'required|max:150',
+            'description' => 'required|max:250',
+            'body' => 'required',
+        ]);
+
+        $article = Article::findOrFail($id);
+
+        $article->title = $request->title;
+        $article->category_ID = (int) $request->category;
+        $article->description = $request->description;
+        $article->content = $request->body;
+
+        if(isset($request->preview)) {
+            $imageName = explode('/', $article->preview)[2];
+            $request->preview->move(public_path('blog'), $imageName);
+        }
+
+        $article->save();
+
+        return redirect()->route('page-admin-article-list')->with('success', 'Article updated!');
+    }
 }

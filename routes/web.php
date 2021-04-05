@@ -27,6 +27,9 @@ Route::prefix('/admin')->group(function () {
             Route::post('/new', [AdminArticleController::class, 'new'])->name('action-admin-article-new');
 
             Route::get('/delete/{id?}', [AdminArticleController::class, 'delete'])->name('action-admin-article-delete');
+
+            Route::get('/update/{id}', [AdminArticleController::class, 'showUpdateForm'])->name('page-admin-article-update');
+            Route::post('/update/{id}', [AdminArticleController::class, 'update'])->name('action-admin-article-update');
         });
     });
 });

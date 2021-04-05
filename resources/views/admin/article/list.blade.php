@@ -51,8 +51,8 @@
                 <p class="card-text">Author: <span class="badge badge-secondary">{{ $item->user->name }}</span></p>
             </div>
             <div class="d-flex flex-column p-2">
-                <a class="btn btn-info mb-1" href="{{ route('page-article-detail', $item->slug) }}">Preview</a>
-                <a class="btn btn-primary mb-1" href="#">Update</a>
+                <a class="btn btn-info mb-1" target="_blank" href="{{ route('page-article-detail', $item->slug) }}">Preview</a>
+                <a class="btn btn-primary mb-1" href="{{ route('page-admin-article-update', $item->ID) }}">Update</a>
                 <button class="btn btn-danger mt-auto article-delete" data-value="{{ $item->ID }}" data-toggle="modal" data-target="#delete-modal">Delete</button>
             </div>
         </div>
