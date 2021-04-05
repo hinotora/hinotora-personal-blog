@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
@@ -30,6 +31,10 @@ Route::prefix('/admin')->group(function () {
 
             Route::get('/update/{id}', [AdminArticleController::class, 'showUpdateForm'])->name('page-admin-article-update');
             Route::post('/update/{id}', [AdminArticleController::class, 'update'])->name('action-admin-article-update');
+        });
+
+        Route::prefix('/category')->group(function() {
+            Route::get('/', [AdminCategoryController::class, 'list'])->name('page-admin-category-list');
         });
     });
 });

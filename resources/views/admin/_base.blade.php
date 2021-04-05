@@ -47,7 +47,7 @@
                             </a>
                         </li>
                         <li class="nav-item admin-nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('page-admin-category-list') }}">
                                 <span class="fa-stack fa-lg"><i class="fas fa-list"></i></span> Categories
                             </a>
                         </li>
