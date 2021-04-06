@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 class ArticleController extends Controller
 {
@@ -68,6 +69,11 @@ class ArticleController extends Controller
 
     public function delete($id) {
         $article = Article::findOrFail($id);
+
+        $previewUrl = public_path();
+        $previewUrl.=$article->preview;
+
+        File::delete($previewUrl);
 
         if($article->delete()) {
             return redirect()->back()->with('success','Article deleted!');

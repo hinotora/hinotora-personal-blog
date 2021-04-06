@@ -3,7 +3,7 @@
 @section('title') Articles @endsection
 
 @section('content')
-    <div class="d-flex flex-row border rounded mb-3">
+    <div class="d-flex flex-row mb-3">
         <form class="input-group w-25" action="{{ route('page-admin-article-list') }}" method="GET">
             <input type="text" name="q" class="form-control" placeholder="Search">
             <div class="input-group-append">
