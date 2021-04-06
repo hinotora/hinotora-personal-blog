@@ -17,7 +17,7 @@ return [
 
     'preview' => [
         'home' => 'https://wallpaperaccess.com/full/4167301.jpg',
-        'articles' => 'https://wallpaperaccess.com/full/4167301.jpg',
+        'article' => 'https://wallpaperaccess.com/full/4167301.jpg',
         'category' => 'https://wallpaperaccess.com/full/4167301.jpg',
         'about' => 'https://wallpaperaccess.com/full/4167301.jpg',
         'contacts' => 'https://wallpaperaccess.com/full/4167301.jpg',

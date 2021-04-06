@@ -30,7 +30,7 @@
     @endisset
 
     <div class="dropdown-divider mb-3"></div>
-    @foreach($articles as $item)
+    @forelse($articles as $item)
         <div class="d-flex border rounded mb-3">
             <div class="article-img mr-3">
                 <img class="rounded-left" src="{{ $item->preview }}" alt="{{ $item->preview }}">
@@ -56,7 +56,9 @@
                 <button class="btn btn-danger mt-auto article-delete" data-value="{{ $item->ID }}" data-toggle="modal" data-target="#delete-modal">Delete</button>
             </div>
         </div>
-    @endforeach
+    @empty
+        @include('blocks.empty')
+    @endforelse
 
     <!-- Modal -->
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="Confirm delete" aria-hidden="true">

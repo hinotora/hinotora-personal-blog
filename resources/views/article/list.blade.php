@@ -8,9 +8,11 @@
 
 @section('content')
 
-    @foreach($articles as $item)
+    @forelse($articles as $item)
         @include('blocks.article_block', $item)
-    @endforeach
+    @empty
+        @include('blocks.empty')
+    @endforelse
 
     {{ $articles->links('blocks.paginator') }}
 
