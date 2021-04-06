@@ -35,6 +35,14 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/category')->group(function() {
             Route::get('/', [AdminCategoryController::class, 'list'])->name('page-admin-category-list');
+
+            Route::get('/new', [AdminCategoryController::class, 'showNewForm'])->name('page-admin-category-new');
+            Route::post('/new', [AdminCategoryController::class, 'new'])->name('action-admin-category-new');
+
+            Route::get('/delete/{id?}', [AdminCategoryController::class, 'delete'])->name('action-admin-category-delete');
+
+            Route::get('/update/{id}', [AdminCategoryController::class, 'showUpdateForm'])->name('page-admin-category-update');
+            Route::post('/update/{id}', [AdminCategoryController::class, 'update'])->name('action-admin-category-update');
         });
     });
 });
