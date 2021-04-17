@@ -26,8 +26,8 @@ class UserFactory extends Factory
         $datetime = $this->faker->date().' '.$this->faker->time();
 
         return [
-            'name' => 'Hinotora',
-            'email' => 'igorluf@mail.ru',
+            'name' => 'root',
+            'email' => 'example@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('root'),
             'created_at'=>$datetime,
