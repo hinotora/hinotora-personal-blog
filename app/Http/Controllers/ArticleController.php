@@ -30,9 +30,11 @@ class ArticleController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Adjust view
-        $article->views+=1;
-        $article->save();
+        // Adjust view if published
+        if ($article->published) {
+            $article->views+=1;
+            $article->save();
+        }
 
         return view('article.detail', compact('article'));
     }

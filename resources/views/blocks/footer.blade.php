@@ -28,6 +28,14 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
+                        <a href="{{ config('blog.social.telegram') }}">
+                            <span class="fa-stack fa-lg">
+                              <i class="fas fa-circle fa-stack-2x"></i>
+                              <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
                         <a href="{{ config('blog.social.habrcareer') }}">
                             <span class="fa-stack fa-lg">
                               <i class="fas fa-circle fa-stack-2x"></i>

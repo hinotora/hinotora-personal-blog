@@ -4,7 +4,7 @@
 
 @section('header-title') All Articles @endsection
 @section('header-desc') List of all articles @endsection
-@section('header-image') {{ config('blog.preview.article') }} @endsection
+@section('header-image') {{ config('blog.section.article') }} @endsection
 
 @section('content')
 

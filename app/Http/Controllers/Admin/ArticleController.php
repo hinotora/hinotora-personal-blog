@@ -47,8 +47,8 @@ class ArticleController extends Controller
 
         // Saving banner image into local storage
         $imageName = $image_id.'.'.$request->preview->extension();
-        $request->preview->move(public_path('blog'), $imageName);
-        $imageUrl = '/blog/'.$imageName;
+        $request->preview->move(public_path('articles'), $imageName);
+        $imageUrl = '/articles/'.$imageName;
 
         // Starting to save data
         $article = new Article();
@@ -102,12 +102,13 @@ class ArticleController extends Controller
 
         $article->title = $request->title;
         $article->category_ID = (int) $request->category;
+        $article->published = (bool) $request->mode;
         $article->description = $request->description;
         $article->content = $request->body;
 
         if(isset($request->preview)) {
             $imageName = explode('/', $article->preview)[2];
-            $request->preview->move(public_path('blog'), $imageName);
+            $request->preview->move(public_path('articles'), $imageName);
         }
 
         $article->save();

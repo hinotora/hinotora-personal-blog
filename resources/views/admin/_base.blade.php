@@ -23,7 +23,7 @@
 
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center" href="{{ route('page-admin-dashboard') }}">{{ config('app.name') }}</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center" href="{{ route('page-home-index') }}">{{ config('app.name') }}</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="{{ route('action-admin-logout') }}">Sign out</a>

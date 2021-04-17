@@ -4,7 +4,7 @@
 
 @section('header-title') Hinotora Developer Blog @endsection
 @section('header-desc') Nothing personal, just a blog @endsection
-@section('header-image') {{ config('blog.preview.home') }} @endsection
+@section('header-image') {{ config('blog.section.home') }} @endsection
 
 @section('content')
 

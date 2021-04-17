@@ -33,8 +33,8 @@ class CategoryController extends Controller
 
         $image_id = uniqid();
         $imageName = $image_id.'.'.$request->preview->extension();
-        $request->preview->move(public_path('preview'), $imageName);
-        $imageUrl = '/preview/'.$imageName;
+        $request->preview->move(public_path('categories'), $imageName);
+        $imageUrl = '/categories/'.$imageName;
 
         $category = new Category();
         $category->name = $name;
@@ -82,7 +82,7 @@ class CategoryController extends Controller
 
         if(isset($request->preview)) {
             $imageName = explode('/', $category->preview)[2];
-            $request->preview->move(public_path('preview'), $imageName);
+            $request->preview->move(public_path('categories'), $imageName);
         }
 
         $category->save();

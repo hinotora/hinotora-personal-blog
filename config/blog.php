@@ -11,14 +11,15 @@ return [
         'vk' => 'https://vk.com/igor_luferenko',
         'linkedin' => 'https://www.linkedin.com/in/igor-luferenko/',
         'habrcareer'=> 'https://career.habr.com/hinotora',
+        'telegram' => 'https://t.me/HinotoraBot',
     ],
 
-    'preview' => [
-        'home' => 'https://wallpaperaccess.com/full/4167301.jpg',
-        'article' => 'https://wallpaperaccess.com/full/4167301.jpg',
-        'category' => 'https://wallpaperaccess.com/full/4167301.jpg',
-        'about' => 'https://wallpaperaccess.com/full/4167301.jpg',
-        'contacts' => 'https://wallpaperaccess.com/full/4167301.jpg',
+    'section' => [
+        'home' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
+        'article' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
+        'category' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
+        'about' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
+        'contacts' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
     ]
 
 ];

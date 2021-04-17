@@ -10,7 +10,8 @@
                 <h3 class="font-weight-normal mb-3">{{ $article->title }}</h3>
             </div>
             <div class="flex-fill text-right">
-                <button type="submit" class="btn btn-info mr-1">Save</button>
+                <button type="submit" name="mode" value="0" class="btn btn-info mr-1">Save as draft</button>
+                <button type="submit" name="mode" value="1" class="btn btn-success">Save and publish</button>
             </div>
         </div>
 
