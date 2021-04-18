@@ -423,3 +423,7 @@ footer .copyright {
 .category-container > div:hover {
     opacity: 0.7;
 }
+
+.article img {
+    width: 100% !important;
+}

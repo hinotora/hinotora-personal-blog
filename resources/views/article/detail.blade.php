@@ -7,11 +7,7 @@
 @section('header-image') {{ $article->preview }} @endsection
 
 @section('content')
-    <article>
-        <h2 class="font-weight-normal mb-5">{{ $article->title }}</h2>
-
+    <article class="article">
         {!! html_entity_decode($article->content) !!}
-
-
     </article>
 @endsection
