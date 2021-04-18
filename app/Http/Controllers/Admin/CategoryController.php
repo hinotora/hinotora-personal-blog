@@ -44,7 +44,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('page-admin-category-list')->with('success', 'Category created!');
+        return redirect()->route('page-admin-category-list')->with('success', 'Category created!')->setStatusCode(201);
     }
 
     public function delete($id) {
@@ -59,7 +59,7 @@ class CategoryController extends Controller
             return redirect()->back()->with('success','Category deleted!');
         }
         else {
-            return redirect()->back()->with('fail','Error while deleting');
+            return redirect()->back()->with('fail','Error while deleting')->setStatusCode(204);
         }
     }
 

@@ -23,10 +23,10 @@ class LoginController extends \App\Http\Controllers\Controller
         if (Auth::attempt($credentials, $isRemember)) {
             $request->session()->regenerate();
 
-            return redirect()->route('page-admin-dashboard');
+            return redirect()->route('page-admin-dashboard')->setStatusCode(200);
         }
 
-        return redirect()->route('page-admin-login');
+        return redirect()->route('page-admin-login')->setStatusCode(400);
     }
 
     public function logout(Request $request): \Illuminate\Http\RedirectResponse
@@ -36,6 +36,6 @@ class LoginController extends \App\Http\Controllers\Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('page-admin-login');
+        return redirect()->route('page-admin-login')->setStatusCode(200);
     }
 }
