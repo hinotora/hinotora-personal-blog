@@ -30,7 +30,7 @@ class CreateArticlesTable extends Migration
             $table->string('title', 150);
             $table->string('slug', 150);
             $table->string('description', 250);
-            $table->string('preview', 150);
+            $table->string('preview', 250);
             $table->longText('content');
 
             $table->integer('views')->default(0);
