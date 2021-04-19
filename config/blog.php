@@ -20,6 +20,11 @@ return [
         'category' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
         'about' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
         'contacts' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
-    ]
+    ],
 
+    # Folders names in /storage/app/public which will contain downloaded preview
+    'preview' => [
+        'category' => 'category_preview',
+        'article' => 'article_preview',
+    ]
 ];

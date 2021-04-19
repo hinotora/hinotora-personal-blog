@@ -25,22 +25,21 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name'=>'required|max:50',
             'description'=>'required|max:100',
-            'preview'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'preview'=>'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $name = $request->name;
         $slug = Str::slug($name, '-');
 
-        $image_id = uniqid();
-        $imageName = $image_id.'.'.$request->preview->extension();
-        $request->preview->move(public_path('categories'), $imageName);
-        $imageUrl = '/categories/'.$imageName;
+        $image_url = Storage::disk('public')->putFileAs(
+            config('blog.preview.category'), $request->preview, uniqid().'.jpg'
+        );
 
         $category = new Category();
         $category->name = $name;
         $category->description = $request->description;
         $category->slug = $slug;
-        $category->preview = $imageUrl;
+        $category->preview = '/storage/'.$image_url;
 
         $category->save();
 
@@ -55,12 +54,9 @@ class CategoryController extends Controller
 
         File::delete($previewUrl);
 
-        if($category->delete()) {
-            return redirect()->back()->with('success','Category deleted!');
-        }
-        else {
-            return redirect()->back()->with('fail','Error while deleting')->setStatusCode(204);
-        }
+        $category->delete();
+
+        return redirect()->back()->with('success','Category deleted!')->setStatusCode(200);
     }
 
     public function showUpdateForm($id) {
@@ -81,13 +77,21 @@ class CategoryController extends Controller
         $category->description = $request->description;
 
         if(isset($request->preview)) {
-            $imageName = explode('/', $category->preview)[2];
-            $request->preview->move(public_path('categories'), $imageName);
+            $previewUrl = public_path();
+            $previewUrl.=$category->preview;
+
+            File::delete($previewUrl);
+
+            $image_url = Storage::disk('public')->putFileAs(
+                config('blog.preview.category'), $request->preview, uniqid().'.jpg'
+            );
+
+            $category->preview = '/storage/'.$image_url;
         }
 
         $category->save();
 
-        return redirect()->route('page-admin-category-list')->with('success', 'Category updated!');
+        return redirect()->route('page-admin-category-list')->with('success', 'Category updated!')->setStatusCode(200);
     }
 
 }

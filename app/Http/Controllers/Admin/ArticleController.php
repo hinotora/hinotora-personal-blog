@@ -8,7 +8,9 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
 class ArticleController extends Controller
 {
     public function list(Request $request) {
@@ -35,7 +37,7 @@ class ArticleController extends Controller
             'category' => 'required|exists:categories,ID',
             'title' => 'required|max:150',
             'description' => 'required|max:250',
-            'preview' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'preview' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'body' => 'required',
         ]);
 
@@ -46,9 +48,9 @@ class ArticleController extends Controller
         $slug = Str::of($title)->slug('-');
 
         // Saving banner image into local storage
-        $imageName = $image_id.'.'.$request->preview->extension();
-        $request->preview->move(public_path('articles'), $imageName);
-        $imageUrl = '/articles/'.$imageName;
+        $image_url = Storage::disk('public')->putFileAs(
+            config('blog.preview.article'), $request->preview, uniqid().'.jpg'
+        );
 
         // Starting to save data
         $article = new Article();
@@ -60,11 +62,11 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->created_at = now();
         $article->content = $request->body;
-        $article->preview = $imageUrl;
+        $article->preview = '/storage/'.$image_url;
         $article->save();
 
         // Redirect to article list with message
-        return redirect()->route('page-admin-article-list')->with('success', 'Article created!');
+        return redirect()->route('page-admin-article-list')->with('success', 'Article created!')->setStatusCode(201);
     }
 
     public function delete($id) {
@@ -75,12 +77,9 @@ class ArticleController extends Controller
 
         File::delete($previewUrl);
 
-        if($article->delete()) {
-            return redirect()->back()->with('success','Article deleted!');
-        }
-        else {
-            return redirect()->back()->with('fail','Error while deleting');
-        }
+        $article->delete();
+
+        return redirect()->back()->with('success','Article deleted!')->setStatusCode(200);
     }
 
     public function showUpdateForm($id) {
@@ -107,12 +106,20 @@ class ArticleController extends Controller
         $article->content = $request->body;
 
         if(isset($request->preview)) {
-            $imageName = explode('/', $article->preview)[2];
-            $request->preview->move(public_path('articles'), $imageName);
+            $previewUrl = public_path();
+            $previewUrl.=$article->preview;
+
+            File::delete($previewUrl);
+
+            $image_url = Storage::disk('public')->putFileAs(
+                config('blog.preview.article'), $request->preview, uniqid().'.jpg'
+            );
+
+            $article->preview = '/storage/'.$image_url;
         }
 
         $article->save();
 
-        return redirect()->route('page-admin-article-list')->with('success', 'Article updated!');
+        return redirect()->route('page-admin-article-list')->with('success', 'Article updated!')->setStatusCode(200);
     }
 }
