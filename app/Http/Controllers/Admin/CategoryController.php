@@ -43,10 +43,13 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('page-admin-category-list')->with('success', 'Category created!')->setStatusCode(201);
+        return redirect()->route('page-admin-category-list')->with('success', 'Category created!');
     }
 
-    public function delete($id) {
+    public function delete($id = null) {
+
+        if($id == null) return redirect()->back();
+
         $category = Category::findOrFail($id);
 
         $previewUrl = public_path();
@@ -56,7 +59,7 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return redirect()->back()->with('success','Category deleted!')->setStatusCode(200);
+        return redirect()->route('page-admin-category-list')->with('success','Category deleted!');
     }
 
     public function showUpdateForm($id) {
@@ -91,7 +94,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('page-admin-category-list')->with('success', 'Category updated!')->setStatusCode(200);
+        return redirect()->route('page-admin-category-list')->with('success', 'Category updated!');
     }
 
 }

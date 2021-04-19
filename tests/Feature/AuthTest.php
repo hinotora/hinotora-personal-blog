@@ -15,7 +15,7 @@ class AuthTest extends TestCase
     {
         $response = $this->get(route('page-admin-dashboard'));
         $response->assertLocation(route('page-admin-login'))
-            ->assertStatus(302); //TODO сделать выдачу 401 при неавториз действиях
+            ->assertStatus(302);
     }
 
     public function test_show_login()

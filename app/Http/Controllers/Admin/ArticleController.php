@@ -66,10 +66,13 @@ class ArticleController extends Controller
         $article->save();
 
         // Redirect to article list with message
-        return redirect()->route('page-admin-article-list')->with('success', 'Article created!')->setStatusCode(201);
+        return redirect()->route('page-admin-article-list')->with('success', 'Article created!');
     }
 
-    public function delete($id) {
+    public function delete($id = null) {
+
+        if($id == null) return redirect()->back(400)->setStatusCode(400);
+
         $article = Article::findOrFail($id);
 
         $previewUrl = public_path();
@@ -79,7 +82,7 @@ class ArticleController extends Controller
 
         $article->delete();
 
-        return redirect()->back()->with('success','Article deleted!')->setStatusCode(200);
+        return redirect()->route('page-admin-article-list')->with('success','Article deleted!');
     }
 
     public function showUpdateForm($id) {
@@ -120,6 +123,6 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect()->route('page-admin-article-list')->with('success', 'Article updated!')->setStatusCode(200);
+        return redirect()->route('page-admin-article-list')->with('success', 'Article updated!');
     }
 }
