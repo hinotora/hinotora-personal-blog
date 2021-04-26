@@ -14,7 +14,8 @@ class AuthTest extends TestCase
     public function test_unauth_access()
     {
         $response = $this->get(route('page-admin-dashboard'));
-        $response->assertLocation(route('page-admin-login'))
+        $response
+            ->assertLocation(route('page-admin-login'))
             ->assertStatus(302);
     }
 
@@ -34,7 +35,8 @@ class AuthTest extends TestCase
 
         $response = $this->post(route('action-admin-login'), $data);
 
-        $response->assertLocation(route('page-admin-login'))
+        $response
+            ->assertLocation(route('page-admin-login'))
             ->assertStatus(400);
     }
 
@@ -48,13 +50,15 @@ class AuthTest extends TestCase
 
         $response = $this->post(route('action-admin-login'), $data);
 
-        $response->assertLocation(route('page-admin-dashboard'))
+        $response
+            ->assertLocation(route('page-admin-dashboard'))
             ->assertStatus(200);
     }
 
     public function test_user_logout() {
         $response = $this->get(route('action-admin-logout'));
-        $response->assertLocation(route('page-admin-login'))
+        $response
+            ->assertLocation(route('page-admin-login'))
             ->assertStatus(200);
     }
 }

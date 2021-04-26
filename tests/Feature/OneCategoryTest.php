@@ -14,7 +14,8 @@ class OneCategoryTest extends TestCase
     public function test_one_category()
     {
         $response = $this->get(route('page-category-detail', 'php-series'));
-        $response->assertSee('PHP Series')
+        $response
+            ->assertSee('PHP Series')
             ->assertStatus(200);
     }
 

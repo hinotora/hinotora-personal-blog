@@ -14,18 +14,10 @@ return [
         'telegram' => 'https://t.me/HinotoraBot',
     ],
 
-    'section' => [
-        'home' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
-        'article' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
-        'category' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
-        'about' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
-        'contacts' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
-    ],
-
-    'default_preview' => 'https://dmrcsitefinity.blob.core.windows.net/publicimages/All-in-one_SDK-1500x600.jpg',
+    'preview' => 'https://dmrcsitefinity.blob.core.windows.net/publicimages/All-in-one_SDK-1500x600.jpg',
 
     # Folders names in /storage/app/public which will contain downloaded preview
-    'preview' => [
+    'preview_folders' => [
         'category' => 'category_preview',
         'article' => 'article_preview',
     ]

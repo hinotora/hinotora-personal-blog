@@ -41,11 +41,11 @@ class ArticleController extends Controller
         if (isset($validated['preview'])) {
             $storage_prefix = '/storage/';
             $image_url = Storage::disk('public')->putFileAs(
-                config('blog.preview.article'), $validated['preview'], uniqid().'.jpg'
+                config('blog.preview_folders.article'), $validated['preview'], uniqid().'.jpg'
             );
             $image_url = $storage_prefix.$image_url;
         } else {
-            $image_url = config('blog.default_preview');
+            $image_url = config('blog.preview');
         }
 
         // Starting to save data
@@ -106,7 +106,7 @@ class ArticleController extends Controller
             File::delete($previewUrl);
 
             $image_url = Storage::disk('public')->putFileAs(
-                config('blog.preview.article'), $request->preview, uniqid().'.jpg'
+                config('blog.preview_folders.article'), $validated['preview'], uniqid().'.jpg'
             );
 
             $article->preview = '/storage/'.$image_url;

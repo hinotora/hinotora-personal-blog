@@ -32,11 +32,11 @@ class CategoryController extends Controller
         if (isset($validated['preview'])) {
             $storage_prefix = '/storage/';
             $image_url = Storage::disk('public')->putFileAs(
-                config('blog.preview.category'), $validated['preview'], uniqid().'.jpg'
+                config('blog.preview_folders.category'), $validated['preview'], uniqid().'.jpg'
             );
             $image_url = $storage_prefix.$image_url;
         } else {
-            $image_url = config('blog.default_preview');
+            $image_url = config('blog.preview');
         }
 
         $category = new Category();
@@ -87,7 +87,7 @@ class CategoryController extends Controller
             File::delete($previewUrl);
 
             $image_url = Storage::disk('public')->putFileAs(
-                config('blog.preview.category'), $validated['preview'], uniqid().'.jpg'
+                config('blog.preview_folders.category'), $validated['preview'], uniqid().'.jpg'
             );
 
             $category->preview = '/storage/'.$image_url;
