@@ -4,7 +4,7 @@
 
 @section('header-title') All categories @endsection
 @section('header-desc')  @endsection
-@section('header-image') {{ config('blog.section.category') }} @endsection
+@section('header-image') {{ config('blog.preview') }} @endsection
 
 @section('content')
     <h3 class="font-weight-normal mb-3">All categories</h3>

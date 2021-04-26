@@ -26,6 +26,10 @@
             </div>
         @endif
 
+        <div class="my-3 preview_image mx-auto">
+            <img id="preview_image" src="{{ $category->preview }}" alt="preview image">
+        </div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Title</span>
@@ -40,10 +44,6 @@
         <div class="custom-file">
             <label class="custom-file-label" for="preview">Update preview image</label>
             <input type="file" name="preview" class="custom-file-input" id="preview">
-        </div>
-
-        <div class="my-3 preview_image mx-auto">
-            <img id="preview_image" src="{{ $category->preview }}" alt="preview image">
         </div>
     </form>
 

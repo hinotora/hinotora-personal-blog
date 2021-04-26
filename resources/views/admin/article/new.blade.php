@@ -28,7 +28,7 @@
         @endif
 
         <div class="my-3 preview_image mx-auto">
-            <img id="preview_image" src="{{ config('blog.default_preview') }}" alt="preview image">
+            <img id="preview_image" src="{{ config('blog.preview') }}" alt="preview image">
         </div>
 
         <div class="input-group mb-3">

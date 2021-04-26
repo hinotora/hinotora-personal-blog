@@ -4,7 +4,7 @@
 
 @section('header-title') Contacts @endsection
 @section('header-desc') Some ways to contact me @endsection
-@section('header-image') {{ config('blog.section.contacts') }} @endsection
+@section('header-image') {{ config('blog.preview') }} @endsection
 
 @section('content')
     <h3 class="font-weight-normal mb-3">Contacts Page</h3>
