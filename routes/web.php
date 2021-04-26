@@ -45,25 +45,25 @@ Route::prefix('/admin')->group(function () {
         Route::prefix('/articles')->group(function() {
             Route::get('/', [AdminArticleController::class, 'list'])->name('page-admin-article-list');
 
-            Route::get('/new', [AdminArticleController::class, 'showNewForm'])->name('page-admin-article-new');
-            Route::post('/new', [AdminArticleController::class, 'new'])->name('action-admin-article-new');
+            Route::get('/new', [AdminArticleController::class, 'new'])->name('page-admin-article-new');
+            Route::post('/new', [AdminArticleController::class, 'store'])->name('action-admin-article-new');
 
-            Route::get('/delete/{id?}', [AdminArticleController::class, 'delete'])->name('action-admin-article-delete');
+            Route::get('/update/{id}', [AdminArticleController::class, 'update'])->name('page-admin-article-update');
+            Route::post('/update/{id}', [AdminArticleController::class, 'store_update'])->name('action-admin-article-update');
 
-            Route::get('/update/{id}', [AdminArticleController::class, 'showUpdateForm'])->name('page-admin-article-update');
-            Route::post('/update/{id}', [AdminArticleController::class, 'update'])->name('action-admin-article-update');
+            Route::get('/delete/{id}', [AdminArticleController::class, 'delete'])->name('action-admin-article-delete');
         });
 
         Route::prefix('/category')->group(function() {
             Route::get('/', [AdminCategoryController::class, 'list'])->name('page-admin-category-list');
 
-            Route::get('/new', [AdminCategoryController::class, 'showNewForm'])->name('page-admin-category-new');
-            Route::post('/new', [AdminCategoryController::class, 'new'])->name('action-admin-category-new');
+            Route::get('/new', [AdminCategoryController::class, 'new'])->name('page-admin-category-new');
+            Route::post('/new', [AdminCategoryController::class, 'store'])->name('action-admin-category-new');
+
+            Route::get('/update/{id}', [AdminCategoryController::class, 'update'])->name('page-admin-category-update');
+            Route::post('/update/{id}', [AdminCategoryController::class, 'store_update'])->name('action-admin-category-update');
 
             Route::get('/delete/{id?}', [AdminCategoryController::class, 'delete'])->name('action-admin-category-delete');
-
-            Route::get('/update/{id}', [AdminCategoryController::class, 'showUpdateForm'])->name('page-admin-category-update');
-            Route::post('/update/{id}', [AdminCategoryController::class, 'update'])->name('action-admin-category-update');
         });
     });
 });

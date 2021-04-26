@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,45 +12,46 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function list() {
+    public function list()
+    {
         $categories = Category::all()->sortByDesc('ID');
 
         return view('admin.category.list', compact('categories'));
     }
 
-    public function showNewForm() {
+    public function new()
+    {
         return view('admin.category.new');
     }
 
-    public function new(Request $request) {
-        $validated = $request->validate([
-            'name'=>'required|max:50',
-            'description'=>'required|max:100',
-            'preview'=>'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+    public function store(CategoryStoreRequest $request)
+    {
+        $validated = $request->validated();
 
-        $name = $request->name;
-        $slug = Str::slug($name, '-');
-
-        $image_url = Storage::disk('public')->putFileAs(
-            config('blog.preview.category'), $request->preview, uniqid().'.jpg'
-        );
+        // Saving banner image into local storage
+        if (isset($validated['preview'])) {
+            $storage_prefix = '/storage/';
+            $image_url = Storage::disk('public')->putFileAs(
+                config('blog.preview.category'), $validated['preview'], uniqid().'.jpg'
+            );
+            $image_url = $storage_prefix.$image_url;
+        } else {
+            $image_url = config('blog.default_preview');
+        }
 
         $category = new Category();
-        $category->name = $name;
-        $category->description = $request->description;
-        $category->slug = $slug;
-        $category->preview = '/storage/'.$image_url;
+        $category->name = $validated['name'];
+        $category->description = $validated['description'];
+        $category->slug = Str::slug($validated['name'], '-');;
+        $category->preview = $image_url;
 
         $category->save();
 
         return redirect()->route('page-admin-category-list')->with('success', 'Category created!');
     }
 
-    public function delete($id = null) {
-
-        if($id == null) return redirect()->back();
-
+    public function delete($id)
+    {
         $category = Category::findOrFail($id);
 
         $previewUrl = public_path();
@@ -62,31 +64,30 @@ class CategoryController extends Controller
         return redirect()->route('page-admin-category-list')->with('success','Category deleted!');
     }
 
-    public function showUpdateForm($id) {
+    public function update($id)
+    {
         $category = Category::findOrFail($id);
 
         return view('admin.category.update', compact('category'));
     }
 
-    public function update(Request $request, $id) {
-        $validated = $request->validate([
-            'name'=>'required|max:50',
-            'description'=>'required|max:100',
-        ]);
+    public function store_update(CategoryStoreRequest $request, $id)
+    {
+        $validated = $request->validated();
 
         $category = Category::findOrFail($id);
 
-        $category->name = $request->name;
-        $category->description = $request->description;
+        $category->name = $validated['name'];
+        $category->description = $validated['description'];
 
-        if(isset($request->preview)) {
+        if(isset($validated['preview'])) {
             $previewUrl = public_path();
             $previewUrl.=$category->preview;
 
             File::delete($previewUrl);
 
             $image_url = Storage::disk('public')->putFileAs(
-                config('blog.preview.category'), $request->preview, uniqid().'.jpg'
+                config('blog.preview.category'), $validated['preview'], uniqid().'.jpg'
             );
 
             $category->preview = '/storage/'.$image_url;
@@ -96,5 +97,4 @@ class CategoryController extends Controller
 
         return redirect()->route('page-admin-category-list')->with('success', 'Category updated!');
     }
-
 }

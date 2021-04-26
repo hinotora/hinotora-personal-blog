@@ -22,6 +22,8 @@ return [
         'contacts' => 'https://live.staticflickr.com/7504/16258492451_029c36e2c6_b.jpg',
     ],
 
+    'default_preview' => 'https://dmrcsitefinity.blob.core.windows.net/publicimages/All-in-one_SDK-1500x600.jpg',
+
     # Folders names in /storage/app/public which will contain downloaded preview
     'preview' => [
         'category' => 'category_preview',

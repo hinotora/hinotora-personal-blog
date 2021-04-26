@@ -35,7 +35,7 @@ class CreateArticlesTable extends Migration
 
             $table->integer('views')->default(0);
 
-            $table->date('created_at')->useCurrent();
+            $table->date('created_at');
         });
     }
 
