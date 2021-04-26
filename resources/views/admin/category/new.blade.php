@@ -26,6 +26,10 @@
             </div>
         @endif
 
+        <div class="my-3 preview_image mx-auto">
+            <img id="preview_image" src="{{ config('blog.default_preview') }}" alt="preview image">
+        </div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Category name</span>
@@ -38,12 +42,8 @@
         </div>
 
         <div class="custom-file">
-            <label class="custom-file-label" for="preview">Choose preview image</label>
+            <label class="custom-file-label" for="preview">Change preview image</label>
             <input type="file" name="preview" class="custom-file-input" id="preview">
-        </div>
-
-        <div class="my-3 preview_image mx-auto">
-            <img id="preview_image" src="https://place-hold.it/700x200" alt="preview image">
         </div>
     </form>
 @endsection

@@ -13,14 +13,12 @@
     </div>
 
     @if(session('success'))
-        <div class="dropdown-divider mb-3"></div>
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endisset
 
     @if(session('fail'))
-        <div class="dropdown-divider mb-3"></div>
         <div class="alert alert-danger" role="alert">
             {{ session('fail') }}
         </div>
@@ -72,7 +70,7 @@
         $(document).ready(function () {
             $('.category-delete').click(function () {
                 let category_id = $(this).attr('data-value');
-                let link = "{{ route('action-admin-category-delete') }}/"+category_id;
+                let link = "/admin/category/delete/"+category_id;
 
                 $('.delete-confirm').attr("href", link);
             });

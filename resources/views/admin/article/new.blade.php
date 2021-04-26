@@ -10,8 +10,8 @@
                 <h3 class="font-weight-normal mb-3">New article</h3>
             </div>
             <div class="flex-fill text-right">
-                <button type="submit" name="mode" value="0" class="btn btn-info mr-1">Save as draft</button>
-                <button type="submit" name="mode" value="1" class="btn btn-success">Save and publish</button>
+                <button type="submit" name="mode" value="0" class="btn btn-info mr-1">Save / Not publish</button>
+                <button type="submit" name="mode" value="1" class="btn btn-success">Save / Publish</button>
             </div>
         </div>
 
@@ -26,6 +26,10 @@
                 </ul>
             </div>
         @endif
+
+        <div class="my-3 preview_image mx-auto">
+            <img id="preview_image" src="{{ config('blog.default_preview') }}" alt="preview image">
+        </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -50,16 +54,11 @@
         </div>
 
         <div class="custom-file">
-            <label class="custom-file-label" for="preview">Choose preview image</label>
+            <label class="custom-file-label" for="preview">Change preview image</label>
             <input type="file" name="preview" class="custom-file-input" id="preview">
         </div>
 
-        <div class="my-3 preview_image mx-auto">
-            <img id="preview_image" src="https://place-hold.it/700x200" alt="preview image">
-        </div>
-
         <div class="form-group mt-2">
-            <label for="wysiwyg"> Article body </label>
             <textarea name="body" id="wysiwyg" rows="10">{{ old('body') }}</textarea>
         </div>
     </form>

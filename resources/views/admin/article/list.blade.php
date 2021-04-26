@@ -16,14 +16,12 @@
     </div>
 
     @if(session('success'))
-        <div class="dropdown-divider mb-3"></div>
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endisset
 
     @if(session('fail'))
-        <div class="dropdown-divider mb-3"></div>
         <div class="alert alert-danger" role="alert">
             {{ session('fail') }}
         </div>
@@ -88,7 +86,7 @@
         $(document).ready(function () {
             $('.article-delete').click(function () {
                 let article_id = $(this).attr('data-value');
-                let link = "{{ route('action-admin-article-delete') }}/"+article_id;
+                let link = "/admin/articles/delete/"+article_id;
 
                 $('.delete-confirm').attr("href", link);
             });

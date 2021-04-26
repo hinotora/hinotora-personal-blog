@@ -38,7 +38,7 @@
         </div>
 
         <div class="custom-file">
-            <label class="custom-file-label" for="preview">Choose preview image</label>
+            <label class="custom-file-label" for="preview">Update preview image</label>
             <input type="file" name="preview" class="custom-file-input" id="preview">
         </div>
 
