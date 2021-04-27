@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 
-class AdminController extends \App\Http\Controllers\Controller
+class AdminController extends Controller
 {
-    public function dashboard()
+    /**
+     * Returns dashboard in the admin section.
+     *
+     * @return View
+     */
+    public function dashboard(): View
     {
         return view('admin.dashboard');
     }

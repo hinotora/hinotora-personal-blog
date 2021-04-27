@@ -5,52 +5,77 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function list()
+    /**
+     * Returns view with list of categories in admin section.
+     *
+     * @return View
+     */
+    public function list(): View
     {
-        $categories = Category::all()->sortByDesc('ID');
+        $categories = Category::all();
 
         return view('admin.category.list', compact('categories'));
     }
 
-    public function new()
+    /**
+     * Returns view of new adding category form.
+     *
+     * @return View
+     */
+    public function new(): View
     {
         return view('admin.category.new');
     }
 
-    public function store(CategoryStoreRequest $request)
+    /**
+     * Creates new category from request data and redirects
+     * back with result in session.
+     *
+     * @param CategoryStoreRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
         // Saving banner image into local storage
         if (isset($validated['preview'])) {
-            $storage_prefix = '/storage/';
-            $image_url = Storage::disk('public')->putFileAs(
+            $storagePrefix = '/storage/';
+            $imageUrl = Storage::disk('public')->putFileAs(
                 config('blog.preview_folders.category'), $validated['preview'], uniqid().'.jpg'
             );
-            $image_url = $storage_prefix.$image_url;
+            $imageUrl = $storagePrefix.$imageUrl;
         } else {
-            $image_url = config('blog.preview');
+            $imageUrl = config('blog.preview');
         }
 
         $category = new Category();
         $category->name = $validated['name'];
         $category->description = $validated['description'];
-        $category->slug = Str::slug($validated['name'], '-');;
-        $category->preview = $image_url;
+        $category->slug = Str::of($validated['name'])->slug();
+        $category->preview = $imageUrl;
 
         $category->save();
 
         return redirect()->route('page-admin-category-list')->with('success', 'Category created!');
     }
 
-    public function delete($id)
+    /**
+     * Removes category by id and redirects back
+     * with result in session.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function delete(int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);
 
@@ -64,14 +89,28 @@ class CategoryController extends Controller
         return redirect()->route('page-admin-category-list')->with('success','Category deleted!');
     }
 
-    public function update($id)
+    /**
+     * Returns update view of existing category.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function update(int $id): View
     {
         $category = Category::findOrFail($id);
 
         return view('admin.category.update', compact('category'));
     }
 
-    public function store_update(CategoryStoreRequest $request, $id)
+    /**
+     * Updates existing view with request data and
+     * redirects back with result in session.
+     *
+     * @param CategoryStoreRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function store_update(CategoryStoreRequest $request, int $id): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -86,11 +125,11 @@ class CategoryController extends Controller
 
             File::delete($previewUrl);
 
-            $image_url = Storage::disk('public')->putFileAs(
+            $imageUrl = Storage::disk('public')->putFileAs(
                 config('blog.preview_folders.category'), $validated['preview'], uniqid().'.jpg'
             );
 
-            $category->preview = '/storage/'.$image_url;
+            $category->preview = '/storage/'.$imageUrl;
         }
 
         $category->save();

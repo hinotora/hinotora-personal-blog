@@ -3,18 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
-    public function list() {
+    /**
+     * Returns view with all categories.
+     *
+     * @return View
+     */
+    public function list(): View
+    {
         $categories = Category::all();
 
         return view('category.list', compact('categories'));
     }
 
-    public function detail($category_slug)
+    /**
+     * Shows all articles with category slug.
+     *
+     * @param $categorySlug
+     * @return View
+     */
+    public function detail(string $categorySlug): View
     {
-        $category = Category::where('slug', $category_slug)->firstOrFail();
+        $category = Category::where('slug', $categorySlug)->firstOrFail();
 
         $articles = $category->articles()->with(['user','category'])->paginate(config('blog.pagination'));
 

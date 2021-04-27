@@ -6,11 +6,6 @@ use Tests\TestCase;
 
 class OneArticleTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_one_article()
     {
         $response = $this->get(route('page-article-detail', 'lets-hack-somebody-using-python'));

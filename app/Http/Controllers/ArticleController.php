@@ -3,19 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Contracts\View\View;
 
 class ArticleController extends Controller
 {
-    public function recent()
+    /**
+     * Returns view with three recent articles on main page.
+     *
+     * @return View
+     */
+    public function recent(): View
     {
         $articles = Article::with(['user','category'])
             ->where('published', 1)
-            ->orderBy('created_at', 'desc')->limit(3)->get();
+            ->latest()
+            ->limit(3)
+            ->get();
 
         return view('home', compact('articles'));
     }
 
-    public function list()
+    /**
+     * Returns view with list of all article with pagination.
+     *
+     * @return View
+     */
+    public function list(): View
     {
         $articles = Article::with(['user','category'])
             ->where('published', 1)
@@ -24,7 +37,13 @@ class ArticleController extends Controller
         return view('article.list', compact('articles'));
     }
 
-    public function detail(string $slug)
+    /**
+     * Shows full detail of article.
+     *
+     * @param string $slug
+     * @return View
+     */
+    public function detail(string $slug): View
     {
         $article = Article::with(['user','category'])
             ->where('slug', $slug)

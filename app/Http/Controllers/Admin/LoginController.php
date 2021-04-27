@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends \App\Http\Controllers\Controller
+class LoginController extends Controller
 {
-    public function showLoginForm()
+    /**
+     * Returns login form view of redirects to admin
+     * dashboard if already logged in.
+     *
+     * @return View|RedirectResponse
+     */
+    public function showLoginForm(): View
     {
         if(Auth::check()) {
             return redirect()->route('page-admin-dashboard');
@@ -16,7 +25,13 @@ class LoginController extends \App\Http\Controllers\Controller
         return view('admin.login');
     }
 
-    public function login(Request $request): \Illuminate\Http\RedirectResponse
+    /**
+     * Check user and auth with redirect.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function login(Request $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
         $isRemember = (bool) $request->input('remember');
@@ -30,7 +45,13 @@ class LoginController extends \App\Http\Controllers\Controller
         return redirect()->route('page-admin-login')->setStatusCode(400);
     }
 
-    public function logout(Request $request): \Illuminate\Http\RedirectResponse
+    /**
+     * Logout and redirect back to login form
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
 

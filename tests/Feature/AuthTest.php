@@ -6,11 +6,6 @@ use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_unauth_access()
     {
         $response = $this->get(route('page-admin-dashboard'));

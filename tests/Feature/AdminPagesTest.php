@@ -7,11 +7,6 @@ use Tests\TestCase;
 
 class AdminPagesTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_dashboard_page()
     {
         $user = User::all()->first();
